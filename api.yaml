@@ -1,0 +1,1034 @@
+openapi: 3.0.1
+info:
+  title: 高校实习教务管理系统 API
+  description: 基于 Spring Boot + MyBatis 的教务管理后端示例
+  version: 0.0.1
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /api/teacher/password:
+    post:
+      tags:
+      - teacher-controller
+      operationId: changePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChangeRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/teacher/grade:
+    post:
+      tags:
+      - teacher-controller
+      operationId: submitGrade
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradeSubmitRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/student/password:
+    post:
+      tags:
+      - student-controller
+      operationId: changePassword_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChangeRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/auth/login:
+    post:
+      tags:
+      - auth-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseUser'
+  /api/admin/timetable:
+    post:
+      tags:
+      - admin-controller
+      operationId: uploadTimetable
+      parameters:
+      - name: ownerType
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ownerId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseTimetable'
+  /api/admin/teacher:
+    post:
+      tags:
+      - admin-controller
+      operationId: saveTeacher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/admin/student:
+    post:
+      tags:
+      - admin-controller
+      operationId: saveStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/admin/plan:
+    post:
+      tags:
+      - admin-controller
+      operationId: savePlan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TermPlan'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/admin/major:
+    post:
+      tags:
+      - admin-controller
+      operationId: saveMajor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Major'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/admin/course:
+    post:
+      tags:
+      - admin-controller
+      operationId: saveCourse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/admin/college:
+    post:
+      tags:
+      - admin-controller
+      operationId: saveCollege
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/College'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/admin/clazz:
+    post:
+      tags:
+      - admin-controller
+      operationId: saveClazz
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Clazz'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/admin/assignment:
+    post:
+      tags:
+      - admin-controller
+      operationId: saveAssignment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeachingAssignment'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/teacher/timetable:
+    get:
+      tags:
+      - teacher-controller
+      operationId: downloadTimetable
+      parameters:
+      - name: teacherId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseTimetable'
+  /api/teacher/roster/export:
+    get:
+      tags:
+      - teacher-controller
+      operationId: exportRoster
+      parameters:
+      - name: classId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+  /api/teacher/grades:
+    get:
+      tags:
+      - teacher-controller
+      operationId: listGrades
+      parameters:
+      - name: teacherId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListGradeRecord'
+  /api/teacher/assignments:
+    get:
+      tags:
+      - teacher-controller
+      operationId: listAssignments
+      parameters:
+      - name: teacherId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListTeachingAssignment'
+  /api/student/timetable:
+    get:
+      tags:
+      - student-controller
+      operationId: downloadTimetable_1
+      parameters:
+      - name: studentId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseTimetable'
+  /api/student/grades:
+    get:
+      tags:
+      - student-controller
+      operationId: listGrades_1
+      parameters:
+      - name: studentId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListGradeRecord'
+  /api/auth/captcha:
+    get:
+      tags:
+      - auth-controller
+      operationId: captcha
+      parameters:
+      - name: key
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseString'
+  /api/admin/timetables:
+    get:
+      tags:
+      - admin-controller
+      operationId: listTimetables
+      parameters:
+      - name: ownerType
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ownerId
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListTimetable'
+  /api/admin/teachers:
+    get:
+      tags:
+      - admin-controller
+      operationId: listTeachers
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListTeacher'
+  /api/admin/students:
+    get:
+      tags:
+      - admin-controller
+      operationId: listStudents
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListStudent'
+  /api/admin/plans:
+    get:
+      tags:
+      - admin-controller
+      operationId: listPlans
+      parameters:
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: majorId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListTermPlan'
+  /api/admin/majors:
+    get:
+      tags:
+      - admin-controller
+      operationId: listMajors
+      parameters:
+      - name: collegeId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListMajor'
+  /api/admin/courses:
+    get:
+      tags:
+      - admin-controller
+      operationId: listCourses
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListCourse'
+  /api/admin/colleges:
+    get:
+      tags:
+      - admin-controller
+      operationId: listColleges
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListCollege'
+  /api/admin/clazzes:
+    get:
+      tags:
+      - admin-controller
+      operationId: listClazz
+      parameters:
+      - name: majorId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListClazz'
+  /api/admin/assignments:
+    get:
+      tags:
+      - admin-controller
+      operationId: listAssignments_1
+      parameters:
+      - name: term
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseListTeachingAssignment'
+  /api/admin/teacher/{id}:
+    delete:
+      tags:
+      - admin-controller
+      operationId: deleteTeacher
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+  /api/admin/student/{id}:
+    delete:
+      tags:
+      - admin-controller
+      operationId: deleteStudent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseVoid'
+components:
+  schemas:
+    PasswordChangeRequest:
+      required:
+      - newPassword
+      - oldPassword
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+    ApiResponseVoid:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: object
+    GradeSubmitRequest:
+      required:
+      - courseId
+      - studentId
+      - term
+      type: object
+      properties:
+        studentId:
+          type: integer
+          format: int64
+        courseId:
+          type: integer
+          format: int64
+        term:
+          type: string
+        score:
+          maximum: 100
+          minimum: 0
+          type: number
+          format: double
+    LoginRequest:
+      required:
+      - captcha
+      - password
+      - role
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        captcha:
+          type: string
+        role:
+          type: string
+          enum:
+          - ADMIN
+          - TEACHER
+          - STUDENT
+    ApiResponseUser:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum:
+          - ADMIN
+          - TEACHER
+          - STUDENT
+        name:
+          type: string
+        phone:
+          type: string
+        active:
+          type: boolean
+    ApiResponseTimetable:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/Timetable'
+    Timetable:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        ownerType:
+          type: string
+        ownerId:
+          type: integer
+          format: int64
+        term:
+          type: string
+        fileName:
+          type: string
+        fileUrl:
+          type: string
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        teacherNo:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        hiredDate:
+          type: string
+          format: date
+        collegeId:
+          type: integer
+          format: int64
+        photoUrl:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        studentNo:
+          type: string
+        name:
+          type: string
+        gender:
+          type: string
+        birthday:
+          type: string
+          format: date
+        classId:
+          type: integer
+          format: int64
+        photoUrl:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        enrollmentDate:
+          type: string
+          format: date
+    TermPlan:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        term:
+          type: string
+        majorId:
+          type: integer
+          format: int64
+        courseId:
+          type: integer
+          format: int64
+    Major:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        code:
+          type: string
+        collegeId:
+          type: integer
+          format: int64
+        description:
+          type: string
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        code:
+          type: string
+        name:
+          type: string
+        credit:
+          type: number
+          format: double
+        assessmentMethod:
+          type: string
+        category:
+          type: string
+        nature:
+          type: string
+    College:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        code:
+          type: string
+        description:
+          type: string
+    Clazz:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        majorId:
+          type: integer
+          format: int64
+        grade:
+          type: integer
+          format: int32
+        counselor:
+          type: string
+    TeachingAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        termPlanId:
+          type: integer
+          format: int64
+        teacherId:
+          type: integer
+          format: int64
+        courseType:
+          type: string
+        remarks:
+          type: string
+    ApiResponseListGradeRecord:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GradeRecord'
+    GradeRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        studentId:
+          type: integer
+          format: int64
+        courseId:
+          type: integer
+          format: int64
+        term:
+          type: string
+        score:
+          type: number
+          format: double
+    ApiResponseListTeachingAssignment:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeachingAssignment'
+    ApiResponseString:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: string
+    ApiResponseListTimetable:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Timetable'
+    ApiResponseListTeacher:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Teacher'
+    ApiResponseListStudent:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Student'
+    ApiResponseListTermPlan:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TermPlan'
+    ApiResponseListMajor:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Major'
+    ApiResponseListCourse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+    ApiResponseListCollege:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/College'
+    ApiResponseListClazz:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Clazz'
