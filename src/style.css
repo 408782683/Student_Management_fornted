@@ -1,0 +1,163 @@
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #1f2933;
+  background-color: #f7fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f7fb;
+}
+
+a {
+  color: #0077cc;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+h1 {
+  margin-bottom: 0.2em;
+}
+
+h2 {
+  margin-top: 1.4em;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.2em;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(31, 41, 55, 0.08);
+  padding: 18px;
+  margin: 12px 0;
+}
+
+.flex-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  padding: 8px 10px;
+  border: 1px solid #d7dde5;
+  border-radius: 6px;
+  min-width: 180px;
+  background: #fff;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #2563eb, #22c55e);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  box-shadow: 0 8px 18px rgba(34, 197, 94, 0.2);
+}
+
+button.secondary {
+  background: #0ea5e9;
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 5px 12px rgba(34, 197, 94, 0.18);
+}
+
+.response-box {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 6px;
+}
+
+.tag.admin {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.tag.teacher {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.tag.student {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.grid-two-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.helper-text {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.table-preview {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-preview th,
+.table-preview td {
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-preview th {
+  background: #f3f4f6;
+}
